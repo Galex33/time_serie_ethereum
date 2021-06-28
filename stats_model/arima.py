@@ -38,8 +38,8 @@ def predict_ETH_confidence(start_date, data, model_fit):
     plt.figure(figsize=(18, 8))
 
     # plot in-sample-prediction
-    ax = data['2016-01-31':].plot(label='Observed',color='#006699');
-    pred.predicted_mean.plot(ax=ax, label='One-step Ahead Prediction', alpha=.7, color='#ff0066');
+    ax = data['2016-01-31':].plot(label='Valeurs réelles',color='#006699');
+    pred.predicted_mean.plot(ax=ax, label="Prédictions du cours de l'ETH par semaine", alpha=.7, color='#ff0066');
 
     # draw confidence bound (gray)
     ax.fill_between(pred_ci.index, 
@@ -56,7 +56,6 @@ def predict_ETH_confidence(start_date, data, model_fit):
 def pred_ci(model_fit, start_date, end_date):
     pred = model_fit.get_prediction(start=start_date, end=end_date)
     pred_ci = pred.conf_int()
-    return pred, pred_ci
 
 def inverse_box_cox(model_fit):
     pred = model_fit.get_prediction(start='2021-06-27', end='2021-07-04')
