@@ -12,6 +12,7 @@ def plot(df, date_start, date_end, column, currency):
     plt.legend()
     plt.ylabel(currency, fontsize=18)
     plt.xlabel('YEAR-MONTH', fontsize=18)
+    plt.title('Moyenne du prix de l\'ETH par semaine et par mois')
     return plt.show()
 
 def if_stationarity(timeseries):
