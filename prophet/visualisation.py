@@ -3,15 +3,18 @@ import seaborn as sns
 import numpy as np
 import plotly.graph_objects as go
 from prophet.plot import plot_plotly, plot_components_plotly
+import plotly.express as px
 
 def heatmap_and_cluster(df):
     corr = df.corr()
     mask = np.triu(np.ones_like(corr, dtype=bool))
     plt.figure(figsize=(8, 6))
     heat_map = sns.heatmap(corr, mask=mask, vmin=-1,cmap='RdYlBu_r', vmax=1, square=True,
-                cbar_kws={"shrink": .75}, annot=True).set_title('Matrice de corrélation', fontsize=20)
-    clustermap = sns.clustermap(corr, annot=True, figsize=(8,8))
+                cbar_kws={"shrink": .75}, annot=True).set_title('Matrice de corrélation', fontsize=25)
+    clustermap = sns.clustermap(corr, annot=True, figsize=(8,8)).fig.suptitle('Clustermap', size=25)
+    
     return heat_map, clustermap
+    
 
 def scatter(df, col_x, col_y, event):
     # plot the open price
