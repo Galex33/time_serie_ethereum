@@ -41,12 +41,30 @@ def log_plot(df):
     plt.plot(df)
     return df, plt.plot(df)
 
-def vis_predict(pred, test, legende):
-    np.exp(pred).plot(legend=True)
-    np.exp(test[legende]).plot(legend=True)
-    plt.ylabel("Cours de l'ETH(USD)")
-    plt.title("Prédiction du cours de l'ETH(USD)")
-    plt.show()
+def predict_ETH_confidence(start_date, data):
+    pred = res_s.get_prediction(start=start_date, 
+                          end='2021-07-04',
+                          dynamic=True, full_results=True)
+
+    pred_ci = pred.conf_int()
+
+    plt.figure(figsize=(18, 8))
+
+    # plot in-sample-prediction
+    ax = data['2016-01-31':].plot(label='Real values',color='#006699');
+    pred.predicted_mean.plot(ax=ax, label='ETH Predictions', alpha=.7, color='#ff0066');
+
+    # draw confidence bound (gray)
+    ax.fill_between(pred_ci.index, 
+                    pred_ci.iloc[:, 0], 
+                    pred_ci.iloc[:, 1], color='#ff0066', alpha=.25);
+
+    # style the plot
+    ax.fill_betweenx(ax.get_ylim(), start_date, data.index[-1], alpha=.15, zorder=-1, color='grey');
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Price')
+    plt.legend(loc='upper left')
+    return plt.show()
 
 def predict_future_price_ETH(model_fit, test_data):
     plt.figure(figsize=(12,8))
