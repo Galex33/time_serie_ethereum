@@ -34,12 +34,7 @@ def mask_value(df, col, value):
     filtered_df = df[df_mask]
     return filtered_df
 
-def new_df(df, columns):
-    df1 = df[columns]
-    new_names = {
-        "Date": "ds", 
-        "Opening_Price_ETH": "y",
-    }
-    df1 = df1.rename(columns=new_names)
-    return df1
-
+def new_df_replace_value(df, columns, r_date, r_column, value):
+    df = df[[columns]]
+    df.loc[r_date, r_column] = value
+    return df
