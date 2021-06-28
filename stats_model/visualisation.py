@@ -14,7 +14,7 @@ def plot(df, date_start, date_end, column, currency):
     plt.xlabel('YEAR-MONTH', fontsize=18)
     return plt.show()
 
-def get_stationarity(timeseries):
+def if_stationarity(timeseries):
     rcParams['figure.figsize'] = 11, 9
     rcParams['lines.linewidth'] = 0.5
     # Statistiques mobiles
