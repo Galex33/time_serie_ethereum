@@ -13,7 +13,7 @@ def heatmap_and_cluster(df):
     clustermap = sns.clustermap(corr, annot=True, figsize=(8,8))
     return heat_map, clustermap
 
-def scatter(df, col_x, col_y):
+def scatter(df, col_x, col_y, event):
     # plot the open price
     x = df[col_x]
     y = df[col_y]
@@ -38,7 +38,13 @@ def scatter(df, col_x, col_y):
             rangeslider=dict(visible=True),
             type="date",
         )
-    )
+    )   
+    for value in event.items(): 
+        fig.add_annotation(x=value[1]['x'], y=value[1]['y'],
+        text=value[1]['text'],
+        showarrow=True,
+        arrowhead=1)
+        
     return fig
 
 def plot(model, forecast):
