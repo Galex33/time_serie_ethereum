@@ -19,3 +19,6 @@ def cleaning(df, ls_drop, ls_rename, col_date, path_save_csv, encoding):
     df = formatage_date(df, col_date, path_save_csv, encoding)
     return df
 
+def fillna(df):
+    df = df.fillna(method='bfill')
+    return df
