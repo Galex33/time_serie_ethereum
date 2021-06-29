@@ -67,9 +67,9 @@ def display_predictions(df, model_fit):
     pred = model_fit.get_prediction(start='2021-06-27', end='2021-12-20')
     pred_ci_orig = special.inv_boxcox(pred.conf_int(), 0)
     forecast = special.inv_boxcox(pred.predicted_mean, 0)
-    ax = df.plot(label='observed')
+    ax = df.plot(label='Valeurs réelles ')
     ax.figure.set_size_inches(12, 8)
-    forecast.plot(ax=ax, label='forecast', lw=3, alpha=.7, color='#ff0066')
+    forecast.plot(ax=ax, label="Prédictions du cours de l'ETH par semaine", lw=3, alpha=.7, color='#ff0066')
     ax.fill_between(pred_ci_orig.index,
                     pred_ci_orig.iloc[:, 0],
                     pred_ci_orig.iloc[:, 1], color='k', alpha=.15)
