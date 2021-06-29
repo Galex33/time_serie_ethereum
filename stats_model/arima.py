@@ -50,6 +50,7 @@ def predict_ETH_confidence(start_date, data, model_fit):
     ax.fill_betweenx(ax.get_ylim(), start_date, data.index[-1], alpha=.15, zorder=-1, color='grey');
     ax.set_xlabel('Date')
     ax.set_ylabel('Price')
+    ax.set_title('Prédictions en unités transformées (Box-Cox)', fontsize=16)
     plt.legend(loc='upper left')
     return plt.show()
 
@@ -73,7 +74,7 @@ def display_predictions(df, model_fit):
     ax.fill_between(pred_ci_orig.index,
                     pred_ci_orig.iloc[:, 0],
                     pred_ci_orig.iloc[:, 1], color='k', alpha=.15)
-    ax.set_title('Forecast in original units (Mean)', fontsize=16)
+    ax.set_title('Prédictions en unités originales (USD)', fontsize=16)
     plt.ylim(0,5000)
     plt.legend()
     return plt.show();
